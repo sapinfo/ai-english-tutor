@@ -337,6 +337,7 @@ npm run build    # SvelteKit 프로덕션 빌드 (build/ 폴더)
 ## 12. Change Log
 
 ### 2026-04-08
+- **README 크로스플랫폼 TTS 가이드 추가**: Intel Mac/Windows/Linux PyTorch 설치 안내
 - **코드베이스 대규모 정리**: 단일 엔진 흐름으로 단순화
   - 유지: Web Speech API (STT) → Groq Llama 4 (LLM) → Kokoro Local (TTS)
   - 삭제 API: chat-claude, chat-ollama, chat (Gemini), stt, stt-groq, tts-hf, scribe-token
