@@ -1,0 +1,17 @@
+node_modules
+.svelte-kit
+build
+.env
+.env.local
+.DS_Store
+data/*.db-wal
+data/*.db-shm
+.bkit/
+__pycache__/
+*.pyc
+mlx-audio-server/*.log
+menubar/build/
+menubar/dist/
+menubar/.eggs/
+bak/
+bak_*.zip
