@@ -138,11 +138,6 @@ python3 kokoro_tts_server.py
 > GPU가 없어도 CPU로 동작하지만 음성 생성이 느릴 수 있습니다 (2~5초).
 > NVIDIA GPU가 있다면 `pip install torch` 시 CUDA 버전을 설치하면 빠릅니다.
 
-### TTS 없이 사용하기
-
-Kokoro 설치가 어렵거나 TTS가 필요 없는 경우, TTS 서버 없이도 앱은 정상 동작합니다.
-수업 중 선생님 음성은 나오지 않지만, 텍스트 채팅으로 수업을 진행할 수 있습니다.
-
 ### 공통 사항
 
 - API: OpenAI TTS 호환 형식 (`POST /v1/audio/speech`)

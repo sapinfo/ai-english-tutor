@@ -138,11 +138,6 @@ python3 kokoro_tts_server.py
 > Works on CPU without a GPU, but voice generation may be slower (2-5s).
 > If you have an NVIDIA GPU, install the CUDA version of PyTorch for faster performance.
 
-### Running Without TTS
-
-If Kokoro installation is difficult or TTS is not needed, the app works fine without the TTS server.
-The teacher's voice won't play, but you can still take lessons via text chat.
-
 ### Common
 
 - API: OpenAI TTS compatible (`POST /v1/audio/speech`)
