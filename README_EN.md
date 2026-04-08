@@ -104,25 +104,50 @@ node build/index.js
 
 The production server runs on port 3000.
 
-## TTS Engine Setup (Kokoro Local)
+## TTS Engine Setup
 
-Run the Kokoro TTS local server on Apple Silicon Mac.
+Kokoro TTS server setup for Ms. Sarah's voice. Installation varies by platform.
+
+### Apple Silicon Mac (M1/M2/M3/M4) — MLX Version (Recommended)
+
+Leverages Apple GPU for the fastest voice generation.
 
 ```bash
-# Install dependencies
 pip install kokoro-mlx fastapi uvicorn numpy
 
-# Start server (port 8881)
 cd mlx-audio-server
 python3 kokoro_tts_server.py
-
-# Health check
-curl http://localhost:8881/health
 ```
 
 - Model: Kokoro-82M (MLX 4bit, ~50MB, auto-downloaded on first run)
 - Generation speed: ~0.5s per sentence
+
+### Intel Mac / Windows / Linux — PyTorch Version
+
+MLX is Apple Silicon only. Other platforms use the PyTorch-based Kokoro.
+
+```bash
+# 1. Install dependencies
+pip install kokoro soundfile fastapi uvicorn
+
+# 2. Run the same server script (auto-detects PyTorch mode)
+cd mlx-audio-server
+python3 kokoro_tts_server.py
+```
+
+> Works on CPU without a GPU, but voice generation may be slower (2-5s).
+> If you have an NVIDIA GPU, install the CUDA version of PyTorch for faster performance.
+
+### Running Without TTS
+
+If Kokoro installation is difficult or TTS is not needed, the app works fine without the TTS server.
+The teacher's voice won't play, but you can still take lessons via text chat.
+
+### Common
+
 - API: OpenAI TTS compatible (`POST /v1/audio/speech`)
+- Port: 8881
+- Health check: `curl http://localhost:8881/health`
 
 ## One-click Launch (macOS)
 

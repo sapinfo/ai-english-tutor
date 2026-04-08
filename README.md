@@ -104,25 +104,50 @@ node build/index.js
 
 프로덕션 서버는 포트 3000에서 실행됩니다.
 
-## TTS 엔진 설정 (Kokoro 로컬)
+## TTS 엔진 설정
 
-Apple Silicon Mac에서 Kokoro TTS 로컬 서버를 실행합니다.
+선생님(Ms. Sarah) 음성을 위한 Kokoro TTS 서버 설정입니다. 플랫폼에 따라 설치 방법이 다릅니다.
+
+### Apple Silicon Mac (M1/M2/M3/M4) — MLX 버전 (권장)
+
+Apple GPU를 활용하여 가장 빠른 음성 생성이 가능합니다.
 
 ```bash
-# 의존성 설치
 pip install kokoro-mlx fastapi uvicorn numpy
 
-# 서버 시작 (포트 8881)
 cd mlx-audio-server
 python3 kokoro_tts_server.py
-
-# 상태 확인
-curl http://localhost:8881/health
 ```
 
 - 모델: Kokoro-82M (MLX 4bit, ~50MB, 최초 실행 시 자동 다운로드)
 - 음성 생성: ~0.5초 (일반 문장)
+
+### Intel Mac / Windows / Linux — PyTorch 버전
+
+MLX는 Apple Silicon 전용이므로, 다른 플랫폼에서는 PyTorch 기반 Kokoro를 사용합니다.
+
+```bash
+# 1. 의존성 설치
+pip install kokoro soundfile fastapi uvicorn
+
+# 2. 동일한 서버 스크립트 실행 (자동으로 PyTorch 모드로 동작)
+cd mlx-audio-server
+python3 kokoro_tts_server.py
+```
+
+> GPU가 없어도 CPU로 동작하지만 음성 생성이 느릴 수 있습니다 (2~5초).
+> NVIDIA GPU가 있다면 `pip install torch` 시 CUDA 버전을 설치하면 빠릅니다.
+
+### TTS 없이 사용하기
+
+Kokoro 설치가 어렵거나 TTS가 필요 없는 경우, TTS 서버 없이도 앱은 정상 동작합니다.
+수업 중 선생님 음성은 나오지 않지만, 텍스트 채팅으로 수업을 진행할 수 있습니다.
+
+### 공통 사항
+
 - API: OpenAI TTS 호환 형식 (`POST /v1/audio/speech`)
+- 포트: 8881
+- 상태 확인: `curl http://localhost:8881/health`
 
 ## 원클릭 실행 (macOS)
 
